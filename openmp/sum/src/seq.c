@@ -6,7 +6,7 @@ int sum(int *v, int n)
 {
 	int i, sum;
 	
-	printf("parallel for\n");
+	printf("sequential\n");
 	
 	sum = 0;
 	
