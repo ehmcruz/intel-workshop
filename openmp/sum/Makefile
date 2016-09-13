@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -O2 -fopenmp
+CFLAGS = -fopenmp
 
 OBJSUM := $(patsubst %.c,%.o,$(wildcard src/*.c))
 OBJSUMF := $(patsubst %.c,%.exec,$(wildcard src/*.c))

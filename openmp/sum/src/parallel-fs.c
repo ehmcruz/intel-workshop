@@ -18,14 +18,14 @@ int sum(int *v, int n)
 	for (i=0; i<MAX_THREADS; i++)
 		partial[i] = 0;
 	
-	#pragma omp parallel shared(sum, nthreads) private(i)
+	#pragma omp parallel shared(sum, nthreads) private(i,myid)
 	{
 		#pragma omp single
 		{
 			nthreads = omp_get_num_threads();
 		}
 		
-		#pragma omp flush(nthreads)
+//		#pragma omp flush(nthreads)
 		
 		myid = omp_get_thread_num();
 		

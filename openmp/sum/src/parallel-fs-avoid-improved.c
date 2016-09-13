@@ -14,7 +14,7 @@ struct element_t partial[MAX_THREADS] __attribute__ ((aligned (CACHE_LINE_SIZE))
 
 int sum(int *v, int n)
 {
-	int i, sum, nthreads, myid;
+	int i, sum, nthreads, myid, init, end, slice;
 	
 	printf("parallel\n");
 	
@@ -23,7 +23,7 @@ int sum(int *v, int n)
 	for (i=0; i<MAX_THREADS; i++)
 		partial[i].sum = 0;
 	
-	#pragma omp parallel shared(sum, nthreads) private(i,myid)
+	#pragma omp parallel shared(sum, nthreads) private(i,myid,init,end)
 	{
 		#pragma omp single
 		{
@@ -33,8 +33,15 @@ int sum(int *v, int n)
 /*		#pragma omp flush(nthreads)*/
 		
 		myid = omp_get_thread_num();
+		slice = n / nthreads;
+		init = myid*slice;
 		
-		for (i=myid; i<n; i+=nthreads) {
+		if (myid == (nthreads-1))
+			end = n;
+		else
+			end = init+slice;
+		
+		for (i=init; i<end; i++) {
 			partial[myid].sum += v[i];
 		}
 	}

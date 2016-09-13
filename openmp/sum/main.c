@@ -24,7 +24,7 @@ int main(int argc, char **argv)
 	vector = calloc(n, sizeof(int));
 	assert(vector != NULL);
 	
-	omp_set_num_threads(2);
+//	omp_set_num_threads(2);
 	
 	#pragma omp parallel
 	{
