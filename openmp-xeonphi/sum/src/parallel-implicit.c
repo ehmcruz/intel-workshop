@@ -9,6 +9,8 @@ extern struct timeval xeonphi_time_start, xeonphi_time_end;
 
 struct timeval _Cilk_shared shared_xeonphi_time_start, shared_xeonphi_time_end;
 
+_Cilk_shared myfloat blah;
+
 _Cilk_shared myfloat mic_sum (_Cilk_shared myfloat *v, int n)
 {
 	int i, nthreads = 1;
@@ -29,6 +31,16 @@ _Cilk_shared myfloat mic_sum (_Cilk_shared myfloat *v, int n)
 		}
 	}
 	
+	// Important:
+	// we touch the data to force it to be transfered to the phi
+	// why the hell they don't put this in the manual?
+
+	blah = 0.0;
+	#pragma omp parallel for private(i) reduction(+:sum)
+	for (i=0; i<n; i++) {
+		blah += v[i];
+	}
+
 	gettimeofday(&shared_xeonphi_time_start, NULL);
 	
 	#pragma omp parallel for private(i) reduction(+:sum)
@@ -59,7 +71,7 @@ myfloat sum(myfloat *v, int n)
 	
 	sum = _Cilk_offload mic_sum(implicit, n);
 	
-	printf("xeon phi finished\n");
+	printf("xeon phi finished blah %.3f\n", blah);
 	
 	memcpy(&xeonphi_time_start, &shared_xeonphi_time_start, sizeof(struct timeval));
 	memcpy(&xeonphi_time_end, &shared_xeonphi_time_end, sizeof(struct timeval));
