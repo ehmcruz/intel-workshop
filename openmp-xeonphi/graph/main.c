@@ -13,7 +13,7 @@ int main(int argc, char **argv)
 	static char *awnser[] = { "bad", "ok" };
 	
 	int i, arity, nlevels;
-	uint32_t n;
+	uint32_t n, n_vertices;
 	struct timeval time_start, time_end;
 	double elapsed, xeonphi_elapsed;
 	
@@ -50,7 +50,7 @@ int main(int argc, char **argv)
 		}
 	}
 	
-	create_tree(arity, nlevels);
+	n_vertices = create_tree(arity, nlevels);
 		
 	gettimeofday(&time_start, NULL);
 	memcpy(&xeonphi_time_start, &time_start, sizeof(struct timeval));
@@ -62,7 +62,7 @@ int main(int argc, char **argv)
 	
 	xeonphi_elapsed = xeonphi_time_end.tv_sec - xeonphi_time_start.tv_sec + (xeonphi_time_end.tv_usec - xeonphi_time_start.tv_usec) / 1000000.0;
 	
-	printf("%u nodes touched\ntotal time: %.3f seconds\nxeon phi time: %.3f seconds\n", n, elapsed, xeonphi_elapsed);
+	printf("%u nodes touched, which is %s\ntotal time: %.3f seconds\nxeon phi time: %.3f seconds\n", n, awnser[n_vertices == n], elapsed, xeonphi_elapsed);
 	
 	return 0;
 }

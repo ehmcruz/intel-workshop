@@ -6,8 +6,9 @@
 struct vertex_t;
 
 typedef struct edge_t {
-	struct vertex_t *src;
+//	struct vertex_t *src;
 	struct vertex_t *dest;
+	struct edge_t *next;
 } edge_t;
 
 typedef struct vertex_t {
@@ -15,7 +16,7 @@ typedef struct vertex_t {
 	
 	uint32_t pos; // pos in graph.vertices
 	
-	edge_t **linked;
+	edge_t *linked;
 	uint32_t arity;
 } vertex_t;
 
@@ -40,7 +41,7 @@ vertex_t* get_free_vertex(graph_t *g);
 edge_t* get_free_edge(graph_t *g);
 edge_t* graph_connect_vertices(graph_t *g, vertex_t *src, vertex_t *dest);
 
-void create_tree (uint32_t arity, uint32_t nlevels);
+uint32_t create_tree (uint32_t arity, uint32_t nlevels);
 uint32_t touch_all_nodes ();
 
 #endif

@@ -9,25 +9,18 @@ void graph_init (graph_t *g, uint32_t n_vertices, uint32_t n_edges)
 {
 	uint32_t i, j;
 	
+	printf("total malloc memory: %u MB\n", ( (n_vertices * sizeof(vertex_t)) + (n_edges * sizeof(edge_t)) ) / (1024*1024) );
+	
 	g->vertices = (vertex_t*)calloc(n_vertices, sizeof(vertex_t));
 	assert(g->vertices != NULL);
 	
 	g->edges = (edge_t*)calloc(n_edges, sizeof(edge_t));
 	assert(g->edges != NULL);
-	
-	g->vertices[0].linked = (edge_t**)calloc(n_vertices * n_vertices, sizeof(edge_t*));
-	assert(g->vertices[0].linked != NULL);
-	
-	for (i=1; i<n_vertices; i++) {
-		g->vertices[i].linked = g->vertices[0].linked + i*n_vertices;
-	}
-	
+		
 	for (i=0; i<n_vertices; i++) {
 		g->vertices[i].pos = i;
 		g->vertices[i].arity = 0;
-		
-		for (j=0; j<n_vertices; j++)
-			g->vertices[i].linked[j] = NULL;
+		g->vertices[i].linked = NULL;
 	}
 	
 	g->n_vertices = n_vertices;
@@ -41,7 +34,6 @@ void graph_init (graph_t *g, uint32_t n_vertices, uint32_t n_edges)
 
 void graph_destroy (graph_t *g)
 {
-	free(g->vertices[0].linked);
 	free(g->vertices);
 	free(g->edges);
 }
@@ -65,14 +57,13 @@ edge_t* graph_connect_vertices(graph_t *g, vertex_t *src, vertex_t *dest)
 {
 	edge_t *e;
 	
-	assert(src->arity < g->n_vertices);
-
 	e = get_free_edge(g);
 	
-	e->src = src;
+/*	e->src = src;*/
 	e->dest = dest;
-		
-	src->linked[src->arity] = e;
+	e->next = src->linked;
+	
+	src->linked = e;
 
 	src->arity++;
 	
@@ -113,7 +104,7 @@ static vertex_t* create_node (int level, int arity)
 	return v;
 }
 
-void create_tree (uint32_t arity, uint32_t nlevels)
+uint32_t create_tree (uint32_t arity, uint32_t nlevels)
 {
 	uint32_t n_vertices, n_edges;
 	
@@ -123,11 +114,27 @@ void create_tree (uint32_t arity, uint32_t nlevels)
 	printf("arity: %u\nnumber of levels: %u\nnumber of vertices: %u\nnumber of edges: %u\n", arity, nlevels, n_vertices, n_edges);
 	
 	graph_init(&tree, n_vertices, n_edges);
+	printf("tree allocated\n");
 	tree.tree_root = create_node(nlevels, arity);
+	printf("tree built\n");
+	
+	return n_vertices;
+}
+
+uint32_t touch_node (vertex_t *node)
+{
+	uint32_t n = 1;
+	edge_t *e;
+	
+	for (e=node->linked; e!=NULL; e=e->next) {
+		n += touch_node(e->dest);
+	}
+
+	return n;
 }
 
 uint32_t touch_all_nodes ()
 {
-	return 0;
+	return touch_node(tree.tree_root);
 }
 
