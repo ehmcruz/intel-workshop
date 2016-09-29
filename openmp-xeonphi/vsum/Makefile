@@ -1,7 +1,8 @@
-CC = icc
+CC = /opt/intel/bin/icc
 CFLAGS = -no-vec -qopt-report2 -qopenmp -xAVX
-#-xAVX
-#-axAVX
+
+# DON'T FORGET TO: source /opt/intel/bin/compilervars.sh intel64
+# export OFFLOAD_REPORT=2
 
 OBJSUM := $(patsubst %.c,%.o,$(wildcard src/*.c))
 OBJSUMF := $(patsubst %.c,%.exec,$(wildcard src/*.c))
