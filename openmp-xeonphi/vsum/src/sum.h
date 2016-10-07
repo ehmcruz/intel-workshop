@@ -1,8 +1,8 @@
 #ifndef _SUM_H_
 #define _SUM_H_
 
-typedef float myfloat;
+typedef double myfloat;
 
-void vsum(myfloat *a, myfloat *b, myfloat *c, int n);
+myfloat vsum(myfloat *a, myfloat *b, int n);
 
 #endif

@@ -4,19 +4,21 @@
 
 #include "sum.h"
 
-void vsum(myfloat *a, myfloat *b, myfloat *c, int n)
+myfloat vsum(myfloat *a, myfloat *b, int n)
 {
 	int i;
+	myfloat r = 0;
 	
 	printf("simd aligned\n");
 
 	__asm__ __volatile__ ("nop\nnop\nnop");
 	
-	#pragma vector aligned
-	#pragma simd
+	#pragma simd reduction(+:r)
 	for (i=0; i<n; i++) {
-		a[i] = b[i] + c[i];
+		r += a[i] * b[i];
 	}
 	
 	__asm__ __volatile__ ("nop\nnop\nnop");
+
+	return r;
 }
