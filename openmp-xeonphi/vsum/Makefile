@@ -1,5 +1,5 @@
 CC = /opt/intel/bin/icc
-CFLAGS = -no-vec -qopt-report2 -qopenmp -xAVX
+CFLAGS = -no-vec -unroll0 -qopt-report2 -qopenmp -xAVX
 
 # DON'T FORGET TO: source /opt/intel/bin/compilervars.sh intel64
 # export OFFLOAD_REPORT=2
