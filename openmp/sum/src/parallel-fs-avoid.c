@@ -3,7 +3,7 @@
 #include <assert.h>
 #include <omp.h>
 
-#define MAX_THREADS 64
+#define MAX_THREADS 256
 #define CACHE_LINE_SIZE (64*2)
 
 struct element_t {

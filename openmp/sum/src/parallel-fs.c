@@ -3,7 +3,7 @@
 #include <assert.h>
 #include <omp.h>
 
-#define MAX_THREADS 64
+#define MAX_THREADS 256
 
 int partial[MAX_THREADS];
 
