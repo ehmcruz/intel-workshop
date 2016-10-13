@@ -37,17 +37,9 @@ static void seq_step (int *v, int n, int i)
 
 static void parallel_step (int *v, int n, int i, int nthreads)
 {
-	int the_min, tmp, j;
+	int the_min, tmp;
 	
 	the_min = i;
-
-/*printf("--------------------\n");*/
-/*for (j=0; j<i; j++)*/
-/*	printf("%i ", v[j]);*/
-/*printf(",");*/
-/*for (j=i; j<n; j++)*/
-/*	printf("%i ", v[j]);*/
-/*printf("\n");*/
 	
 	#pragma omp parallel
 	{
@@ -60,20 +52,15 @@ static void parallel_step (int *v, int n, int i, int nthreads)
 			if (v[j] < v[min])
 				min = j;
 		}
-		
-/*		#pragma omp barrier*/
-		
+				
 		#pragma omp critical
 		{
-/*printf("%i. min threads %i = %i\n", i, myid, v[min]);*/
 			if (v[min] < v[the_min])
 				the_min = min;
 		}
 	}
 		
 	if (the_min != i) {
-/*printf("switch %i <--> %i\n", i, the_min);*/
-/*printf("%i. min threads %i = %i\n", i, myid, v[min]);*/
 		tmp = v[i];
 		v[i] = v[the_min];
 		v[the_min] = tmp;

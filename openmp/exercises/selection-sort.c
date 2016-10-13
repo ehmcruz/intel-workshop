@@ -6,10 +6,28 @@
 #include <time.h>
 #include <omp.h>
 
-#include "src/sort.h"
-
 static int *vector;
 static int *test;
+
+void selection_sort(int *v, int n)
+{
+	int i, j, min, tmp;
+
+	for (j = 0; j < n-1; j++) {
+		min = j;
+
+		for ( i = j+1; i < n; i++) {
+			if (v[i] < v[min])
+				min = i;
+		}
+
+		if(min != j) {
+			tmp = v[j];
+			v[j] = v[min];
+			v[min] = tmp;
+		}
+	}
+}
 
 void quick_sort (int *a, int n)
 {
@@ -62,36 +80,9 @@ int main(int argc, char **argv)
 	}
 	printf("done!\n");
 	
-//	omp_set_num_threads(2);
-	
-	#pragma omp parallel
-	{
-		#pragma omp single
-		{
-			printf("there are %u threads %u\n", omp_get_num_threads(), omp_get_thread_num());
-		}
-
-		#pragma omp single
-		{
-			printf("ola %u\n", omp_get_thread_num());
-		}
-
-		
-//		#pragma omp barrier
-		
-		printf("hello from thread %u\n", omp_get_thread_num());
-		
-	//	#pragma omp barrier
-		
-		#pragma omp master
-		{
-			printf("the master thread is %u\n", omp_get_thread_num());
-		}
-	}
-	
 	printf("sorting...\n");
 	gettimeofday(&time_start, NULL);
-	sort(vector, n);
+	selection_sort(vector, n);
 	gettimeofday(&time_end, NULL);
 	
 	printf("checking if output is correct...\n");
