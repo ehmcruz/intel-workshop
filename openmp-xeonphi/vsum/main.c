@@ -34,10 +34,10 @@ int main(int argc, char **argv)
 	
 	printf("number of elements: %i\n", n);
 	
-	va = _mm_malloc(n * sizeof(myfloat), 16);
+	va = _mm_malloc(n * sizeof(myfloat), 64);
 	assert(va != NULL);
 	
-	vb = _mm_malloc(n * sizeof(myfloat), 16);
+	vb = _mm_malloc(n * sizeof(myfloat), 64);
 	assert(vb != NULL);
 	
 //	omp_set_num_threads(2);
