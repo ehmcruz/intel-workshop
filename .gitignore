@@ -1,3 +1,4 @@
 *.o
 *.exec
 a.out
+*.optrpt
