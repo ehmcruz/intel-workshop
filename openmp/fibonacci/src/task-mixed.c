@@ -22,7 +22,7 @@ static uint64_t fib_par (int n)
 		#pragma omp task shared(a)
 		a = fib_par(n-1);
 		
-		#pragma omp task shared(b)
+//		#pragma omp task shared(b)
 		b = fib_par(n-2);
 		
 		#pragma omp taskwait
