@@ -13,6 +13,7 @@ myfloat vsum(myfloat *a, myfloat *b, int n)
 
 	__asm__ __volatile__ ("nop\nnop\nnop");
 	
+	#pragma vector aligned
 	#pragma simd reduction(+:r)
 	for (i=0; i<n; i++) {
 		r += a[i] * b[i];
