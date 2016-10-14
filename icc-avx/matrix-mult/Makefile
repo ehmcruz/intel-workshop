@@ -1,5 +1,5 @@
 CC = icc
-CFLAGS = -no-vec -qopt-report2 -qopenmp -xAVX
+CFLAGS = -no-vec -unroll0 -qopt-report2 -qopenmp -xAVX
 #-xAVX
 #-axAVX
 
