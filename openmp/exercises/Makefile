@@ -8,7 +8,7 @@ task-test.exec: task-test.c
 	gcc -o task-test.exec task-test.c -fopenmp
 
 fibonacci.exec: fibonacci.c
-	gcc -o fibonacci.exec fibonacci.c -fopenmp
+	gcc -o fibonacci.exec fibonacci.c -O2 -fopenmp
 
 vector-reduce-sum-split.exec: vector-reduce-sum-split.c
 	gcc -o vector-reduce-sum-split.exec vector-reduce-sum-split.c -fopenmp
