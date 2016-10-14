@@ -1,7 +1,5 @@
 CC = icc
-CFLAGS = -no-vec -unroll0 -qopt-report2 -qopenmp -xAVX
-#-xAVX
-#-axAVX
+CFLAGS = -no-vec -unroll0 -qopt-report2 -qopenmp -mmic
 
 # DON'T FORGET TO: source /opt/intel/bin/compilervars.sh intel64
 # export OFFLOAD_REPORT=2
@@ -17,10 +15,9 @@ all: main.o sum
 
 %.exec: %.o
 	$(CC) $(CFLAGS) -o $@ $< main.o
-	objdump -D $@ > $@.txt
 
 sum: $(OBJSUMF)
 	@echo "sum sample compiled!"
 
 clean:
-	- rm -rf main.o $(OBJSUM) $(OBJSUMF) src/*.txt src/*.optrpt main.optrpt
+	- rm -rf main.o $(OBJSUM) $(OBJSUMF)

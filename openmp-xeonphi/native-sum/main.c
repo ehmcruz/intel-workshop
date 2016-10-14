@@ -1,0 +1,1 @@
+../../openmp/sum/main.c
