@@ -1,5 +1,5 @@
-CC = /opt/intel/bin/icc
-CFLAGS = -qopenmp
+CC = icc
+CFLAGS = -no-vec -unroll0 -qopt-report2 -qopenmp
 
 # DON'T FORGET TO: source /opt/intel/bin/compilervars.sh intel64
 # export OFFLOAD_REPORT=2
@@ -20,4 +20,4 @@ sum: $(OBJSUMF)
 	@echo "sum sample compiled!"
 
 clean:
-	- rm -rf main.o $(OBJSUM) $(OBJSUMF)
+	- rm -rf main.o $(OBJSUM) $(OBJSUMF) src/*.optrpt

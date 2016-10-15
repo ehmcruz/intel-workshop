@@ -17,10 +17,12 @@ myfloat sum(myfloat *v, int n)
 	
 	sum = 0.0;
 	
-	#pragma offload target(mic) in(v:length(n))
+	#pragma offload target(mic) in(v:length(n)) inout(xeonphi_time_start,xeonphi_time_end)
 	{
 		gettimeofday(&xeonphi_time_start, NULL);
 		
+		#pragma vector aligned
+		#pragma simd reduction(+:sum)
 		for (i=0; i<n; i++) {
 			sum += v[i];
 		}

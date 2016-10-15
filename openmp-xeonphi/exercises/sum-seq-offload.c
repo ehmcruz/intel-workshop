@@ -4,11 +4,34 @@
 #include <sys/time.h>
 #include <omp.h>
 
-#include "src/sum.h"
+typedef double myfloat;
 
 static myfloat *vector;
 
 __attribute__((target(mic))) struct timeval xeonphi_time_start, xeonphi_time_end;
+
+myfloat sum(myfloat *v, int n)
+{
+	int i;
+	myfloat sum;
+	
+	printf("sequential offload\n");
+	
+	sum = 0.0;
+	
+	#pragma offload target(mic) in(v:length(n))
+	{
+		gettimeofday(&xeonphi_time_start, NULL);
+		
+		for (i=0; i<n; i++) {
+			sum += v[i];
+		}
+		
+		gettimeofday(&xeonphi_time_end, NULL);
+	}
+	
+	return sum;
+}
 
 int main(int argc, char **argv)
 {
@@ -26,7 +49,7 @@ int main(int argc, char **argv)
 	
 	vector = _mm_malloc(n * sizeof(myfloat), 64);
 	assert(vector != NULL);
-		
+	
 	for (i=0; i<n; i++)
 		vector[i] = 1.0;
 		
