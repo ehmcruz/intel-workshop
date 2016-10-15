@@ -19,6 +19,8 @@ myfloat sum(myfloat *v, int n)
 	
 	sum = 0.0;
 	
+	// there is also in and inout
+	
 	#pragma offload target(mic) in(v:length(n))
 	{
 		gettimeofday(&xeonphi_time_start, NULL);
