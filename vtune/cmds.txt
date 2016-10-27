@@ -1,6 +1,6 @@
 # cmd para coletar estatísticas de latência no acesso à memória
 
-/opt/intel/vtune_amplifier_xe_2016.3.0.463186/bin64/amplxe-cl -collect-with runsa -knob event-config=MEM_TRANS_RETIRED.LOAD_LATENCY_GT_16:sa=20011,MEM_TRANS_RETIRED.LOAD_LATENCY_GT_256:sa=503,MEM_TRANS_RETIRED.LOAD_LATENCY_GT_4:sa=100003,MEM_TRANS_RETIRED.LOAD_LATENCY_GT_64:sa=2003 -app-working-dir /home/ehmcruz/xeonphi/intel-workshop/openmp/sum/src -- /home/ehmcruz/xeonphi/intel-workshop/openmp/sum/src/parallel-fs.exec 100000000
+/opt/intel/vtune_amplifier_xe_2016.3.0.463186/bin64/amplxe-cl -collect-with runsa -knob event-config=MEM_TRANS_RETIRED.LOAD_LATENCY_GT_4:sa=1,MEM_TRANS_RETIRED.LOAD_LATENCY_GT_16:sa=1,MEM_TRANS_RETIRED.LOAD_LATENCY_GT_64:sa=1,MEM_TRANS_RETIRED.LOAD_LATENCY_GT_256:sa=1 -app-working-dir /home/ehmcruz/intel-workshop/openmp/sum/src -- /home/ehmcruz/intel-workshop/openmp/sum/src/parallel-fs.exec 100000000
 
 # cmd para listar todos os hardware counters
 
