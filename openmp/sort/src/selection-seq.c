@@ -8,18 +8,16 @@ void sort(int *v, int n)
 {
 	int i, j, min, tmp;
 
-	for (j = 0; j < n-1; j++) {
-		min = j;
+	for (i=0; i<n-1; i++) {
+		min = i;
 
-		for ( i = j+1; i < n; i++) {
-			if (v[i] < v[min])
-				min = i;
+		for (j= i+1; j<n; j++) {
+			if (v[j] < v[min])
+				min = j;
 		}
 
-		if(min != j) {
-			tmp = v[j];
-			v[j] = v[min];
-			v[min] = tmp;
-		}
+		tmp = v[i];
+		v[i] = v[min];
+		v[min] = tmp;
 	}
 }
