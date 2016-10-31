@@ -2,7 +2,7 @@ all: selection-sort.exec task-test.exec fibonacci.exec vector-reduce-sum-split.e
 	@echo "Compiled everything! Yes!"
 
 selection-sort.exec: selection-sort.c
-	gcc -o selection-sort.exec selection-sort.c -fopenmp
+	gcc -o selection-sort.exec selection-sort.c -O2 -fopenmp
 
 task-test.exec: task-test.c
 	gcc -o task-test.exec task-test.c -fopenmp
