@@ -23,7 +23,7 @@ int sum(int *v, int n)
 	for (i=0; i<MAX_THREADS; i++)
 		partial[i].sum = 0;
 	
-	#pragma omp parallel shared(sum, nthreads) private(i,myid,init,end)
+	#pragma omp parallel shared(sum, nthreads) private(i,myid,init,end,slice)
 	{
 		#pragma omp single
 		{

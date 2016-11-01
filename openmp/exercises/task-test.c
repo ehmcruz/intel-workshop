@@ -30,6 +30,8 @@ int main ()
 
 			#pragma omp task
 			do_parallel(1);
+			
+			#pragma omp taskwait
 
 			do_parallel(2);
 		}
