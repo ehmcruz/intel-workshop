@@ -32,7 +32,7 @@ int main(int argc, char **argv)
 	
 	int i, n;
 	struct timeval time_start, time_end;
-	double elapsed; //, xeonphi_elapsed;
+	double elapsed;
 	myfloat r;
 	
 	assert(argc == 2);
@@ -56,14 +56,10 @@ int main(int argc, char **argv)
 	}
 		
 	gettimeofday(&time_start, NULL);
-/*	memcpy(&xeonphi_time_start, &time_start, sizeof(struct timeval));*/
-/*	memcpy(&xeonphi_time_end, &time_start, sizeof(struct timeval));*/
 	r = vsum(va, vb, n);
 	gettimeofday(&time_end, NULL);
 	
 	elapsed = time_end.tv_sec - time_start.tv_sec + (time_end.tv_usec - time_start.tv_usec) / 1000000.0;
-	
-/*	xeonphi_elapsed = xeonphi_time_end.tv_sec - xeonphi_time_start.tv_sec + (xeonphi_time_end.tv_usec - xeonphi_time_start.tv_usec) / 1000000.0;*/
 	
 	printf("output is %f, which is %s\ntotal time: %.3f seconds\n", r, awnser[ check(r, n) ], elapsed);
 	
