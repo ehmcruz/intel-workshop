@@ -1,4 +1,4 @@
-all: selection-sort.exec task-test.exec fibonacci.exec vector-reduce-sum-split.exec
+all: selection-sort.exec task-test.exec fibonacci.exec vector-reduce-sum-split.exec vector-sum.exec
 	@echo "Compiled everything! Yes!"
 
 selection-sort.exec: selection-sort.c
@@ -13,5 +13,8 @@ fibonacci.exec: fibonacci.c
 vector-reduce-sum-split.exec: vector-reduce-sum-split.c
 	gcc -o vector-reduce-sum-split.exec vector-reduce-sum-split.c -fopenmp
 
+vector-sum.exec: vector-sum.c
+	gcc -o vector-sum.exec vector-sum.c -fopenmp	
+
 clean:
-	- rm *.exec
+	rm -f *.exec
