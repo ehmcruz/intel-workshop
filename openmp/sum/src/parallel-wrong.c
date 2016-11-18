@@ -16,9 +16,7 @@ int sum(int *v, int n)
 		{
 			nthreads = omp_get_num_threads();
 		}
-		
-		#pragma omp flush(nthreads)
-		
+				
 		for (i=omp_get_thread_num(); i<n; i+=nthreads) {
 			sum += v[i];
 		}
