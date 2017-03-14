@@ -1,5 +1,42 @@
-*.o
-*.exec
-a.out
+# msserpa
+*.bin
 *.optrpt
-*.exec.txt
+*.txt
+
+# Object files
+*.o.*
+*.o
+*.ko
+*.obj
+*.elf
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Libraries
+*.lib
+*.a
+*.la
+*.lai
+*.lo
+*.slo
+
+# Shared objects (inc. Windows DLLs)
+*.dll
+*.so
+*.so.*
+*.dylib
+
+# Executables
+*.exe
+*.exec
+*.out
+*.app
+*.i*86
+*.x86_64
+*.hex
+
+# Debug files
+*.dSYM/
+*.su
