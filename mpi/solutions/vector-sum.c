@@ -3,28 +3,6 @@
 #include <stdlib.h>
 #include <assert.h>
 
-/*
-	MPI_Scatter(
-		void* send_data,
-		int send_count,
-		MPI_Datatype send_datatype,
-		void* recv_data,
-		int recv_count,
-		MPI_Datatype recv_datatype,
-		int root,
-		MPI_Comm communicator)
-
-	MPI_Gather(
-		void* send_data,
-		int send_count,
-		MPI_Datatype send_datatype,
-		void* recv_data,
-		int recv_count,
-		MPI_Datatype recv_datatype,
-		int root,
-		MPI_Comm communicator)
-*/
-
 #define el_per_proc 10
 
 int main (int argc, char **argv)

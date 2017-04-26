@@ -1,19 +1,10 @@
 CC=mpicc
 
-all: hello-world send-recv scatter-gather bcast
+all: vector-sum
 	@echo "Compiled! Yes!"
 
-hello-world: hello-world.c
-	$(CC) -o hello-world hello-world.c
-
-send-recv: send-recv.c
-	$(CC) -o send-recv send-recv.c
-
-scatter-gather: scatter-gather.c
-	$(CC) -o scatter-gather scatter-gather.c
-
-bcast: bcast.c
-	$(CC) -o bcast bcast.c
+vector-sum: vector-sum.c
+	$(CC) -o vector-sum vector-sum.c
 
 clean:
-	- rm -f hello-world send-recv scatter-gather
+	- rm -f vector-sum
