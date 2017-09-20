@@ -13,7 +13,7 @@ myfloat vsum(myfloat *a, myfloat *b, int n)
 	int i;
 	myfloat r;
 	__m512d ac, va, vb, mul;
-	double partial[4];
+	double partial[8];
 	
 	printf("avx simple knl\n");
 	
