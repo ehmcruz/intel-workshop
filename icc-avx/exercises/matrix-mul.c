@@ -19,9 +19,8 @@ void matrix_mult (myfloat *first, myfloat *second, myfloat *multiply, int first_
 		for (j=0; j<second_cols; j++) {
 			sum = 0;
 			
-			for (k=0; k<first_cols; k++) {
+			for (k=0; k<first_cols; k++)
 				sum += first[i*first_cols+k] * second[k*second_cols+j];
-			}
 
 			multiply[i*second_cols+j] = sum;
 		}
