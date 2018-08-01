@@ -1,6 +1,6 @@
 # DON'T FORGET TO: source /opt/intel/bin/compilervars.sh intel64
 
-all: vector-reduce-sum-mul-sequential.exec matrix-mul.exec
+all: vector-reduce-sum-mul-sequential.exec matrix-mul.exec matrix-mul-quadratic.exec
 	@echo "Compiled everything! Yes!"
 
 vector-reduce-sum-mul-sequential.exec: vector-reduce-sum-mul-sequential.c
@@ -8,6 +8,9 @@ vector-reduce-sum-mul-sequential.exec: vector-reduce-sum-mul-sequential.c
 
 matrix-mul.exec: matrix-mul.c
 	icc -o matrix-mul.exec matrix-mul.c -no-vec -unroll0 -qopt-report2 -qopenmp -xAVX
+
+matrix-mul-quadratic.exec: matrix-mul-quadratic.c
+	icc -o matrix-mul-quadratic.exec matrix-mul-quadratic.c -no-vec -unroll0 -qopt-report2 -qopenmp -xAVX
 
 clean:
 	- rm *.exec *.optrpt
